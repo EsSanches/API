@@ -2,7 +2,7 @@ from typing import Annotated
 from fastapi import APIRouter, Path
 
 # прослойка маршрутов не подключая к основному приложению
-router = APIRouter(prefix="/items")
+router = APIRouter(prefix="/items", tags=["items"])
 
 @router.get("/")
 def list_item():
@@ -15,5 +15,5 @@ def get_latest_item():
 
 # получить item по id
 @router.get("/{item_id}/")
-def get_item_id(item_id: Annotated[int, Path(ge=1, lt=1000000)]):
+def get_item_id(item_id: Annotated[int, Path(ge=1, lt=1_000_000)]):
     return {"item": {"id": item_id}}

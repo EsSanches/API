@@ -1,13 +1,14 @@
 from fastapi import FastAPI, Path
 import uvicorn
 from pydantic import EmailStr, BaseModel
+
 from item_views import router as items_router
+from users.views import router as users_router
 
 app = FastAPI()
 app.include_router(items_router)
+app.include_router(users_router)
 
-class Users(BaseModel):
-    email: EmailStr
 
 @app.get("/")
 def read_root():
@@ -23,11 +24,6 @@ def hello(name: str = "Незнакомец"):
 @app.get("/custom/")
 def read_custom_message():
     return {"message": "this is a custom message!"}
-
-# ипользовать метод post
-@app.post("/users/")
-def create_user(user: Users):
-    return {"message": "success", "email": user.email}
 
 @app.post("/calc/add/")
 def calc(a: int, b: int):
