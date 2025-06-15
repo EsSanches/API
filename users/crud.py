@@ -1,4 +1,9 @@
-
+"""
+create
+read
+update
+delete
+"""
 
 from users.schemas import Users
 
